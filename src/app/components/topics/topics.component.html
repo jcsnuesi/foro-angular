@@ -1,0 +1,37 @@
+<div class="col-lg-12 mt-3">
+    <h1>{{page_title}}</h1>
+    <hr>
+<div class="col-lg-12 mt-3" *ngIf="!topics">
+    <img src="{{ '../assets/loader.gif'}}">
+</div>
+    <ul class="list-group list-topics mb-3">
+        <li class="list-group-item" *ngFor="let topic of topics; index as i;">
+            <h4>
+            <a [routerLink]="['/tema', topic._id]"> {{topic.title}} </a>
+            </h4>
+            
+            <span class="badge bg-primary">
+            {{topic.user.name + ' ' + topic.user.surname}}
+            </span>
+            <span class="badge bg-secondary ms-2">
+                {{topic.date | amLocale: 'es' | amDateFormat:'LL'}}
+                
+            </span>
+            <a [routerLink]="['/tema', topic._id]" class="btn btn-sm btn-success float-end mx-auto d-block">Leer</a>
+
+        </li>
+      
+    </ul>
+<div class="clearfix"></div>
+<!-- NAVEGACION DE PAGINACION -->
+<nav aria-label="Page navigation example" *ngIf="!nopaginate">                 
+    <ul class="pagination mt-4">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item" *ngFor="let num of number_pages">
+            <a class="page-link" [routerLink]="['/temas', num]">{{num}}</a>
+        </li>
+       
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+</nav>
+</div>

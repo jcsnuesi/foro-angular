@@ -1,0 +1,109 @@
+
+<div class="col-lg-12">
+
+     <div class="topic-data col-lg-7 float-start mt-3">
+        <h1>{{page_title}}</h1>
+        <span class="badge bg-warning ms-2" *ngIf="topic.lang">
+            {{topic.lang}}
+        </span>
+        <span class="badge bg-primary">
+            {{topic.user.name + ' ' + topic.user.surname}}
+        </span>
+        <span class="badge bg-secondary ms-2">
+            {{topic.date | amLocale: 'es' | amDateFormat:'LL'}}
+        </span>
+
+        <hr>
+        <p id="topic-content" class=" mt-2">
+            {{topic.content}}
+        </p>
+             
+        <textarea class="col-lg-12" disabled *ngIf="topic.code && topic.lang">
+            {{topic.code}}
+
+        </textarea>
+          
+    
+    </div>
+
+  <div class="clearfix"></div>
+
+ 
+    <div id="comment-box" class="mt-2 col-lg-7">
+        
+        <h3>Comentarios</h3>
+
+        <hr>
+
+        <div class="alert alert-success  mt-3" *ngIf="status === 'success'">
+            El comentario fue agregado exitosamente!
+
+        </div>
+
+        <div class="alert alert-danger  mt-3" *ngIf="status === 'error'">
+            Hubo un error al agregar el comentario!
+        </div>
+        
+        <form #formComment="ngForm" (ngSubmit)="onSubmit(formComment)" *ngIf="identity">
+
+            <div class="form-group">
+
+                <label for="content"> Contenido: </label>
+                <textarea type="text" name="content" #content="ngModel" [(ngModel)]="comment.content" required class="form-control mt-2"></textarea>
+            
+                <small *ngIf="!content.valid && content.touched" class="invalid-feedback d-block">
+                    El contenido no es valido!
+                </small>
+            </div>
+            <input type="submit" value="Comentar" [disabled]="formComment.invalid" class="mt-2 btn btn-success">
+        </form>
+
+        <hr>
+
+        <div class="alert alert-success  mt-3" *ngIf="status === 'successc'">
+            Comentario eliminado exitosamente!
+        
+        </div>
+        
+        <div class="alert alert-danger  mt-3" *ngIf="status === 'errorc'">
+            Hubo un error al eliminar el comentario!
+        </div>
+
+        <ul class="list-group list-comment mb-5">
+
+            <li class="list-group-item comment-item"  *ngFor="let comm of topic.comments">
+           
+          
+                <span class="avatar_masker">
+                    <img src="{{ url + 'avatar/' + comm.user.image}}" class="avatar_masker">
+                </span>
+   
+
+                <span class="badge bg-primary ms-2">
+                  
+                    {{comm.user.name + ' ' + comm.user.surname}}
+               
+                </span>
+     
+                <span class="badge bg-secondary ms-1">
+                    {{comm.date | amLocale: 'es' | amTimeAgo}}
+                </span>
+    
+
+               <span class="d-block ms-5">
+
+                    {{comm.content}}
+
+               </span>
+                
+                <button class="btn btn-sm btn-danger float-end" *ngIf="identity.user" (click)="deleteComment(comm._id)">Borrar</button>
+            </li>
+          
+        </ul>
+
+    </div>
+
+
+
+
+</div>
