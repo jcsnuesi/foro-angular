@@ -1,67 +1,74 @@
-<div class="container">
 
   <!-- Cabecera de la web -->
-  <nav class="navbar navbar-expand-lg bg-light mt-4">
-
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black mt-4">
     <div class="container-fluid">
-
-      <a class="navbar-brand" [routerLink]="['/inicio']">
-        <img src="" alt="">
+      <a class="navbar-brand"  [routerLink]="['/inicio']">
+        <img src="../assets/pics/caballa_logo.png" alt="" style="width: 90px;height:90px;">
       </a>
-           
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" [routerLink]="['/inicio']">Inicio <span class="sr-onlye">(Current)</span> </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/temas']">Ver temas</a>
-          </li>
-          
-          <li class="nav-item" *ngIf="identity.user">
-            <a class="nav-link pointer" [routerLink]="['/panel/crear']">Crear tema</a>
-          </li>
-          <li class="nav-item"  *ngIf="identity.user">
-            <a class="nav-link pointer" [routerLink]="['/usuarios']">Compañeros</a>
-          </li>
-          <li class="nav-item">
-          &nbsp;
-          </li>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
          
-          <li class="nav-item">
-            <form class="d-flex" role="search" #searchForm="ngForm">
-              <input class="form-control me-2" name="searcher" type="search" placeholder="¿Que buscas?" #searcher="ngModel" [(ngModel)]="search" aria-label="Search">
-
-              <button class="btn btn-outline-success" type="submit" (click)="goSearch()">Buscar</button>
-            </form>
-          </li>
-        </ul>
-             
+            <li class="nav-item">
+              <a class="nav-link"  aria-current="page" [routerLink]="['/inicio']" [routerLinkActive]="'active'">Inicio </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/temas']" [routerLinkActive]="'active'">Ver temas</a>
+            </li>
+          
+            <li class="nav-item" *ngIf="identity.user">
+              <a class="nav-link pointer" [routerLink]="['/panel/crear']" [routerLinkActive]="'active'">Crear tema</a>
+            </li>
+            <li class="nav-item" *ngIf="identity.user">
+              <a class="nav-link pointer" [routerLink]="['/usuarios']" [routerLinkActive]="'active'">Compañeros</a>
+            </li>
+            <li class="nav-item">
+              &nbsp;
+            </li>
+          
+            <li class="nav-item">
+              <form class="d-flex" role="search" #searchForm="ngForm">
+                <input class="form-control me-2" name="searcher" type="search" placeholder="¿Que buscas?" #searcher="ngModel"
+                  [(ngModel)]="search" aria-label="Search">
+          
+                <button class="btn btn-outline-danger me-3" type="submit" (click)="goSearch()">Buscar</button>
+              </form>
+            </li>
+          </ul>
+          
           <ul class="navbar-nav navbar-right">
-            <li class="nav-item" *ngIf="!identity.user">
-              <a class="nav-link" [routerLink]="['/registro']">Registro</a>
+            <li  class="nav-item" *ngIf="!identity.user">
+              <a class="nav-link" [routerLink]="['/registro']" [routerLinkActive]="'active'">Registro</a>
             </li>
             <li class="nav-item" *ngIf="!identity.user">
-              <a class="nav-link" [routerLink]="['/login']">Login</a>
+              <a class="nav-link" [routerLink]="['/login']" [routerLinkActive]="'active'" >
+            
+            <i class="fa-light fa-user"></i>
+            </a>
             </li>
-
-            <li class="nav-item"  *ngIf="identity.user">
+          
+            <li class="nav-item" *ngIf="identity.user">
               <div class="avatar_mask" *ngIf="identity.user.image">
                 <img src="{{ url + 'avatar/' + identity.user.image}}" class="avatar_nav">
               </div>
-                <div class="avatar_mask" *ngIf="!identity.user.image">
-                  <img src="{{ '../assets/userpro.png'}}">
-                </div>
-
+              <div class="avatar_mask" *ngIf="!identity.user.image">
+                <img src="{{ '../assets/userpro.png'}}">
+              </div>
+          
             </li>
-           
+          
             <li class="nav-item dropdown" *ngIf="identity.user">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
-             
-               {{identity.user.name + " " + identity.user.surname}}
- 
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+          
+                {{identity.user.name + " " + identity.user.surname}}
+          
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"  >
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <li><a class="dropdown-item" [routerLink]="['/panel']">Panel de usuario</a></li>
                 <li><a class="dropdown-item" [routerLink]="['/perfil/', identity.user._id]">Mi perfil</a></li>
                 <li><a class="dropdown-item" [routerLink]="['/ajustes']">Ajustes</a></li>
@@ -69,11 +76,14 @@
               </ul>
             </li>
           </ul>
-       
       </div>
     </div>
   </nav>
 
 <router-outlet></router-outlet>
+
+<hr>
+<footer>
+  <p>Desalloda por JC - Dev 2022</p>
+</footer>
   
-</div>

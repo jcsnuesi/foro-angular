@@ -9,7 +9,7 @@ export class HomeComponent implements OnInit {
   public page_title;
 
   constructor() {
-    this.page_title = "Bienvenidos a este foro de Desarrollares Web"
+    this.page_title = "Bienvenido a Caballa Media ▶📣"
    }
 
   ngOnInit(): void {
@@ -17,3 +17,4 @@ export class HomeComponent implements OnInit {
   }
 
 }
+
