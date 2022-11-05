@@ -52,14 +52,12 @@ export class UserEditComponent implements OnInit {
     };
    }
 
-
-
   avatarUpload(data : any){
     
     let data_obj = data.body
     this.user.image = data_obj.user.image
 
-  
+    console.log(data_obj)
   }
 
   ngOnInit(): void {

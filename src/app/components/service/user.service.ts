@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { global } from './global';
-
+ 
 
 @Injectable()
 export class UserService{
